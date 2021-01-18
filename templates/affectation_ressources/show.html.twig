@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+<title>AffectationRessources</title>
+
+{% block body %}
+    <h1>AffectationRessources</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ affectation_ressource.id }}</td>
+            </tr>
+            <tr>
+                <th>Mois</th>
+                <td>{{ affectation_ressource.Mois }}</td>
+            </tr>
+            <tr>
+                <th>Pourcentage</th>
+                <td>{{ affectation_ressource.pourcentage }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('affectation_ressources_index') }}">back to list</a>
+
+    <a href="{{ path('affectation_ressources_edit', {'id': affectation_ressource.id}) }}">edit</a>
+
+    {{ include('affectation_ressources/_delete_form.html.twig') }}
+{% endblock %}

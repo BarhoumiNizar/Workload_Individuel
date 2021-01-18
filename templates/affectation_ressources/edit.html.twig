@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+
+<title>Edit AffectationRessources</title>
+
+{% block body %}
+    <h1>Edit AffectationRessources</h1>
+
+    {{ include('affectation_ressources/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('affectation_ressources_index') }}">back to list</a>
+
+    {{ include('affectation_ressources/_delete_form.html.twig') }}
+{% endblock %}

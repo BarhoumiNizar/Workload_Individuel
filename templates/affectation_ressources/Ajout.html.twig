@@ -1,0 +1,159 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}New Ressources{% endblock %}
+
+{% block main %}
+    <style>
+      #ressources_form_web input{width:100px}
+      label,#ressources_form_web label{font-size:17px;}
+         #ressources_form_web label{position:relative;left:-30px}
+    </style>
+        <div class="row" style="width:95%;margin:auto">
+                            <!-- Textual inputs start -->
+                            <div class="col-12 mt-5" style="width:100%" >
+                                <div class="card"style="width:100%">
+                                    <div class="card-body" style="width:100%">
+                                        <h4 class="header-title">{{activation}} >> {{classe}}</h4>
+                                         {% for message in app.flashes('affectation') %}
+                                          <div class="alert alert-danger">
+                                              {{ message }}
+                                          </div>
+                                      {% endfor %}
+										 {{ form_start(form) }}
+
+                     <div class="form-group" style="width:25%;float:left">
+                                            <label for="example-text-input" class="col-form-label">{{ form_label(form.Ressource) }}</label>
+                                          {{ form_widget(form.Ressource) }}
+                                        </div>
+                      <div class="form-group" style="width:25%;float:left;margin-left:5%">
+                                            <label for="example-text-input" class="col-form-label">Projet:</label>
+                                              <select name="projet[]" required class="form-control"  style="position:relative;top:10px">
+                                                        {% for p in projets %}
+                                                          <option>{{ p.nomProjet}}</option>
+                                                        {% endfor %}
+                                              </select>
+                                        </div>
+										 <div class="form-group" style="width:15%;float:left;margin-left:5%">
+                                            <label for="example-text-input" class="col-form-label" style="font-size:18px">Mois:</label>
+                                         <select name="Mois[]" required class="form-control" style="position:relative;top:5px">
+                                         <option>Janvier</option>
+                                           <option>Février</option>
+                                             <option>Mars</option>
+                                               <option>Avril</option>
+                                                 <option>Mai</option>
+                                                   <option>Juin</option>
+                                                     <option>Juillet</option>
+                                                       <option>Aôut</option>
+                                                         <option>Septembre</option>
+                                                           <option>Octobre</option>
+                                                             <option>Novembre</option>
+                                                               <option>Décembre</option>
+                                         </select>
+                                        </div>
+
+										 <div class="form-group" style="width:15%;float:left;margin-left:5%">
+                                            <label for="example-text-input" class="col-form-label" style="font-size:18px">Pourcentage:</label>
+                                        <input type="text" name="pourcentage[]" required class="form-control" style="position:relative;top:5px" >
+                                        </div>
+                  <div class="col-sm-9 col-sm-offset-3" style="float:right;width:20%;">
+												<button class="btn btn-primary" type="submit">Valider</button>
+												<button type="reset" class="btn btn-default">Annuler</button>
+											</div>
+
+										{{ form_end(form) }}
+                </div>
+                   <!-- Progress Table start -->
+                    <div class="col-12 mt-5">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="header-title">Rapport Global :</h4>
+                                <div class="single-table">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover progress-table text-center">
+                                            <thead class="text-uppercase">
+                                                <tr>
+                                                    <th scope="col">Ressource</th>
+                                                     <th scope="col">Compétences</th>
+                                                    <th scope="col">Niveaux de Compétence</th>
+                                                    <th scope="col">Projet</th>
+                                                    <th scope="col">Mois d'affectation</th>
+                                                    <th scope="col">pourcentage</th>
+                                                  
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            
+                                                {% for affectation in affectationRessources %}
+                                                  <tr>
+                                                    <th scope="row">{{affectation.Ressource.NomPrenom}}</th> 
+                                                    <td>
+                                                      <table width=100%>
+                                                        {% for cmpt in affectation.Ressource.competences %}
+                                                       <tr><td>{{cmpt}}</td></tr>
+                                                       {% endfor %}
+                                                      </table>
+                                                    </td>
+                                                   
+                                                    <td>
+                                                     <table width=100%>
+                                                        {% for nv in affectation.Ressource.niveau %}
+                                                       <tr><td>{{nv}}</td></tr>
+                                                       {% endfor %}
+                                                      </table>
+                                                    </td>
+                                                    <td>
+                                                     <table width=100%>
+                                                        {% for p in affectation.Projet %}
+                                                       <tr><td >{{p}}</td></tr>
+                                                       {% endfor %}
+                                                      </table>
+                                                    
+                                                    </td>
+                                                     <td>
+                                                    <table width=100% >
+                                                    
+                                                       {% for m in affectation.Mois %}
+                                                            <tr> <td>{{m}}</td></tr> 
+                                                            
+                                                       {% endfor %} 
+                                                           
+                                                            </table>
+                                                    </td>
+
+                                                    <td>
+                                                    <table width=100% >
+                                                    
+                                                       {% for pr in affectation.pourcentage %}
+                                                            <tr> <td>{{pr}}</td></tr> 
+                                                            
+                                                       {% endfor %} 
+                                                           
+                                                            </table>
+                                                    </td>
+                                                    
+                                                   
+                                                </tr>
+                                               
+                                               {% endfor %}
+                                                
+                                                
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Progress Table end -->
+                   
+								</div>
+
+							</div>
+
+              
+
+
+		</div>
+
+
+{% endblock %}

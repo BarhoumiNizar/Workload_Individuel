@@ -1,0 +1,121 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}{{activation}} : {{classe}}{% endblock %}
+
+{% block main %}
+
+    <hr>
+    <style>
+     #ressources_form_web{width:60%;float:left;position:relative;left:-40%}
+      #ressources_form_web input{width:80px}
+      #ressources_form_nom_prenom,#autre_competence{position:relative;left:-25%}
+      label,#ressources_form_web label{font-size:17px;}
+         #ressources_form_web label{position:relative;left:-20px}
+    </style>
+ <div class="row" style="width:70%;margin:auto">
+                            <!-- Textual inputs start -->
+                            <div class="col-12 mt-5" style="width:100%" >
+                                <div class="card"style="width:100%">
+                                    <div class="card-body" style="width:100%">
+                                        <h4 class="header-title">{{activation}} >> {{classe}}</h4>
+                                         {% for message in app.flashes('verificationRessource') %}
+                                          <div class="alert alert-danger">
+                                              {{ message }}
+                                          </div>
+                                      {% endfor %}
+
+                                      {% if niveaux ==null %}
+										 {{ form_start(form) }}
+										 <div class="form-group  custom-control-inline" style="width:100%" >
+                                            <label for="example-text-input" class="col-form-label" style="width:80%;font-size:16px;">{{ form_label(form.nom_prenom) }}</label>
+                                          {{ form_widget(form.nom_prenom,{'attr':{'readonly':true}}) }}
+                                        </div>
+                                       
+										 <div class="form-group">
+                     <label for="example-text-input" class="col-form-label" style="width:150px;font-size:16px">Competences :</label>
+                                       
+                                         {% for cmpt in ressource.competences %}
+                                         
+                                          <div class="custom-control custom-checkbox custom-control-inline">
+                                                <input type="checkbox" checked readonly name="competence[]" value="{{cmpt}}"  class="custom-control-input" id="{{cmpt}}">
+                                                <label class="custom-control-label" for="{{cmpt}}">{{cmpt}}</label>
+                                            </div>
+                
+                                           
+                                        {% endfor %}
+                                         
+                                            </div>
+
+                                            {########### Autre compétence#################}
+                                           <div class="form-group  custom-control-inline" style="width:100%" >
+                                            <label for="autre_competence" class="col-form-label" style="width:80%;font-size:16px;">Autre Competence:</label>
+                                          <input type="text" name="autre_competence" id="autre_competence" class="form-control">
+                                        </div>
+                                           
+
+										<div class="form-group custom-control-inline" style="width:100%" >
+                                            <label for="example-text-input" class="col-form-label" style="width:75%;font-size:16px;">{{ form_label(form.web) }}</label>
+                                          {{ form_widget(form.web) }}
+                                        </div>
+										
+											<div class="col-sm-9 col-sm-offset-3" style="width:40%;float:right">
+												<button class="btn btn-primary" type="submit">Valider</button>
+												<button type="reset" class="btn btn-default">Annuler</button>
+											</div>
+
+										{{ form_end(form) }}
+
+                                        {### Ajout Niveaux#####}
+                                        {% else %}
+                                        <form method="post" action="{{path('ressources_niveaux')}}">
+                                        <input type="hidden" name="idressource" value="{{ressource.id}}">
+                                        <div class="form-group">
+                                        {%  set i=0 %}
+                                              {% for cmpt in competences %}
+                                               {%  set i=i+1 %}
+                                                 <label for="example-text-input" class="col-form-label" style="width:30%;font-size:16px">Niveaux de Competence :{{cmpt}}</label> 
+                                                 <div class="custom-control custom-checkbox custom-control-inline" style="width:15%">
+                                                <input type="checkbox" name="niveaux[]" value="débutant"  class="custom-control-input" id="débutant{{i}}">
+                                                <label class="custom-control-label" for="débutant{{i}}">débutant</label>
+                                            </div>
+
+                                           <div class="custom-control custom-checkbox custom-control-inline"style="width:15%">
+                                                <input type="checkbox" name="niveaux[]" value="junior" class="custom-control-input" id="junior{{i}}">
+                                                <label class="custom-control-label" for="junior{{i}}">junior</label>
+                                            </div>
+                                           
+                                            <div class="custom-control custom-checkbox custom-control-inline"style="width:15%">
+                                                <input type="checkbox" name="niveaux[]" value="confirmé"   class="custom-control-input" id="confirmé{{i}}">
+                                                <label class="custom-control-label" for="confirmé{{i}}">confirmé </label>
+                                            </div>
+
+                                            <div class="custom-control custom-checkbox custom-control-inline"style="width:15%">
+                                                <input type="checkbox" name="niveaux[]" value="expert"  class="custom-control-input" id="expert{{i}}">
+                                                <label class="custom-control-label" for="expert{{i}}">expert</label>
+                                            </div>
+
+                                           
+
+
+
+                                              {% endfor %}
+                                            <input type="submit" class="btn btn-info mb-3" value="Add Niveau" name="addniveau">
+
+                                        </div>
+                                        </form>
+                                        {% endif %}
+
+                                        
+									</div>
+								</div>
+							</div>
+		</div>
+
+
+
+
+
+
+
+    
+{% endblock %}

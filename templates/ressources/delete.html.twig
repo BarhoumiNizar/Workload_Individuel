@@ -1,0 +1,42 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}{{activation}} : {{classe}}{% endblock %}
+
+{% block main %}
+    <style>
+      #ressources_form_web input{width:100px}
+      label,#ressources_form_web label{font-size:17px;}
+         #ressources_form_web label{position:relative;left:-30px}
+    </style>
+ <div class="row" style="width:70%;margin:auto">
+                            <!-- Textual inputs start -->
+                            <div class="col-12 mt-5" style="width:100%" >
+                                <div class="card"style="width:100%">
+                                    <div class="card-body" style="width:100%">
+                                         <h4 class="header-title">{{activation}} >> {{classe}}</h4>
+
+
+<form method="post" onsubmit="return confirm('Êtes-vous sûr de bien vouloir supprimer cet Ressource?');">
+     <div class="form-group">
+         <label for="example-text-input" class="col-form-label">Ressource</label>
+            <select name="ressource" class="form-control" >
+                {% for rs in ressources  %}
+                <option value="{{rs.id}}">{{rs.NomPrenom}}</option>
+                    {% endfor %}
+            </select>
+            </div>
+   
+   <div class="col-sm-9 col-sm-offset-3" style="float:right;width:40%">
+			<button class="btn btn-primary" type="submit">Supprimer</button>
+			<button type="reset" class="btn btn-default">Retour</button>
+											</div>
+</form>
+
+	</div>
+
+										
+									</div>
+								</div>
+							</div>
+		</div>
+{% endblock %}

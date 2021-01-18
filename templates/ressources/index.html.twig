@@ -1,0 +1,61 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}{{activation}} : {{classe}}{% endblock %}
+
+{% block main %}
+
+<div class="col-12 mt-5">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="header-title">{{activation}} >> {{classe}}</h4>
+                                <div class="single-table">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover progress-table text-center">
+                                            <thead class="text-uppercase">
+                                                <tr>
+                                                
+                                                    <th>Id</th>
+                                                    <th>Nom_prenom</th>
+                                                    <th>Competences</th>
+                                                    <th>Niveau</th>
+                                                    <th>Web</th>
+                                                    {% if classe=='Affectation' %}
+                                                    <th>Affectation Compétence</th>
+                                                    {% endif %}
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                             {% for ressource in ressources %}
+                                        <tr>
+                                            <td>{{ ressource.id }}</td>
+                                            <td>{{ ressource.nomPrenom }}</td>
+                                            <td>
+                                            {% for cmpt in ressource.competences %}
+                                            {{ cmpt }},
+                                            {% endfor %}
+                                            </td>
+                                            <td>
+                                                {% for nv in ressource.niveau %}
+                                                    {{ nv }},
+                                                    {% endfor %}
+                                            </td>
+                                            <td>{{ ressource.web }}</td>
+                                            {% if classe=='Affectation' %}
+                                            <td><a href="{{path('ressources_AffecterCompetence',{'id':ressource.id})}}" class="btn btn-success">Affectation</a></td>
+                                            {% endif %}
+                                        </tr>
+                                    {% else %}
+                                        <tr>
+                                            <td colspan="6">no records found</td>
+                                        </tr>
+                                    {% endfor %}
+                                                       
+                                 </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+{% endblock %}

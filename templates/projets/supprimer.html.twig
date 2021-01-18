@@ -1,0 +1,45 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Supprimer/Désactiver Projet{% endblock %}
+              
+{% block main %}
+ 
+    <style>
+      #ressources_form_web input{width:100px}
+      label,#ressources_form_web label{font-size:17px;}
+         #ressources_form_web label{position:relative;left:-30px}
+    </style>
+         {# {{ include('ressources/_form.html.twig') }}#}
+		 <div class="row" style="width:70%;margin:auto">
+                            <!-- Textual inputs start -->
+                            <div class="col-12 mt-5" style="width:100%" >
+                                <div class="card"style="width:100%">
+                                    <div class="card-body" style="width:100%">
+                                        <h4 class="header-title">{{activation}} >> {{classe}}</h4>
+										<form method="post">
+										  <div class="form-group">
+                                            <label for="example-text-input" class="col-form-label">Projet</label>
+                                        <select name="projet" class="form-control">
+                                          {% for p in projets %}
+
+                                          <option value="{{p.id}}">{{p.nomProjet}}</option>
+                                          {% endfor  %}
+
+                                        </select>
+                      </div>
+
+										 
+											<div class="col-sm-9 col-sm-offset-3" style="float:right;width:40%">
+												<input class="btn btn-danger" type="submit" name="btn" value="Supprimer">
+                        <input class="btn btn-warning" type="submit" name="btn" value="Désactiver">
+												<button type="reset" class="btn btn-default">Annuler</button>
+											</div>
+
+									</form>
+									</div>
+								</div>
+							</div>
+		</div>
+
+ 
+{% endblock %}

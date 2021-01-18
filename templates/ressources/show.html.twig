@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ressources{% endblock %}
+
+{% block body %}
+    <h1>Ressources</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ ressource.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom_prenom</th>
+                <td>{{ ressource.nomPrenom }}</td>
+            </tr>
+            <tr>
+                <th>Competences</th>
+                <td>{{ ressource.competences }}</td>
+            </tr>
+            <tr>
+                <th>Niveau</th>
+                <td>{{ ressource.niveau }}</td>
+            </tr>
+            <tr>
+                <th>Web</th>
+                <td>{{ ressource.web }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('ressources_index') }}">back to list</a>
+
+    <a href="{{ path('ressources_edit', {'id': ressource.id}) }}">edit</a>
+
+    {{ include('ressources/_delete_form.html.twig') }}
+{% endblock %}
